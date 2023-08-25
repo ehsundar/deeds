@@ -1,9 +1,16 @@
 package main
 
 import (
-	"github.com/ehsundar/deeds/internal/server"
+	"flag"
+	"fmt"
 	"net/http"
 	"os"
+
+	"github.com/ehsundar/deeds/internal/server"
+)
+
+var (
+	port = flag.Int("port", 8000, "port")
 )
 
 func main() {
@@ -18,5 +25,5 @@ func main() {
 
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("./images"))))
 
-	http.ListenAndServe(":8000", nil)
+	http.ListenAndServe(fmt.Sprintf("localhost:%d", *port), nil)
 }
