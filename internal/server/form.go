@@ -55,6 +55,8 @@ func (s *Server) HandleFrom(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		s.attachAddon(r.Context(), token)
+
 		http.Redirect(w, r, "/confirm", http.StatusFound)
 	}
 }
